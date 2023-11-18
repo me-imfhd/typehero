@@ -10,7 +10,7 @@ import type * as monacoType from 'monaco-editor';
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import ts from 'typescript';
-import { CodeEditor, LIB_URI } from './code-editor';
+import { CodeEditor, LIB_URI, customTheme } from './code-editor';
 import { useResetEditor } from './editor-hooks';
 import { libSource } from './editor-types';
 import { PrettierFormatProvider } from './prettier';
@@ -292,6 +292,7 @@ export default function SplitEditor({
           height={userEditorState && settings.bindings === 'vim' ? 'calc(100% - 36px)' : '100%'}
           defaultPath={USER_CODE_PATH}
           onMount={async (editor, monaco) => {
+            customTheme(monaco);
             // this just does the typechecking so the UI can update
             onMount?.user?.(editor, monaco);
             typeCheck(monaco);
